@@ -24,7 +24,7 @@ struct ContentView: View {
             }.buttonStyle(.bordered)
             Button("Upload Image") {
                 if let image = image {
-                    uploadImage(image: image) { result in
+                    uploadPhoto(image: image, toURL: "http://10.11.211.192:8080/upload") { result in
                         switch result {
                         case let .success(success):
                             print("Image was uploaded successfully: \(success)")
@@ -44,29 +44,84 @@ struct ContentView: View {
         }
     }
 
-    func uploadImage(image: UIImage, completion: @escaping (Result<Bool, Error>) -> Void) {
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-            completion(.failure(URLError(.badServerResponse)))
+    /// Uploads a photo to a specified URL.
+    /// - Parameters:
+    ///   - image: The image to be uploaded.
+    ///   - url: The URL to which the image should be uploaded.
+    ///   - completion: The completion handler to call when the upload is complete.
+    func uploadPhoto(image: UIImage, toURL url: String, completion: @escaping (Result<URLResponse, Error>) -> Void) {
+        // Ensure the URL is valid
+        guard let uploadURL = URL(string: url) else {
+            completion(.failure(URLError(.badURL)))
             return
         }
 
-        let url = URL(string: "http://10.11.211.81:8080/upload")! // Adjust path as needed
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+        // Convert the image to JPEG data
+        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+            completion(.failure(URLError(.unknown)))
+            return
+        }
 
-        let task = URLSession.shared.uploadTask(with: request, from: imageData) { _, response, error in
+        // Create a URLRequest object
+        var request = URLRequest(url: uploadURL)
+        request.httpMethod = "POST"
+
+        // Generate boundary string using a unique per-app string
+        let boundary = "Boundary-\(UUID().uuidString)"
+
+        // Set the Content-Type header
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        // TODO: get actual file name
+        // file name
+        let imageName = UUID().uuidString
+
+        // Create multipart form body
+        let body = createMultipartFormData(boundary: boundary, data: imageData, fileName: imageName)
+
+        // Set the request body
+        request.httpBody = body
+
+        // Perform the upload task
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { _, response, error in
             if let error = error {
                 completion(.failure(error))
-                return
+            } else if let response = response {
+                completion(.success(response))
             }
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                completion(.failure(URLError(.badServerResponse)))
-                return
-            }
-            completion(.success(true))
         }
         task.resume()
+    }
+
+    /// Creates a multipart/form-data body with the image data.
+    /// - Parameters:
+    ///   - boundary: The boundary string separating parts of the data.
+    ///   - data: The image data to be included in the request.
+    ///   - fileName: The filename for the image data in the form-data.
+    /// - Returns: A `Data` object representing the multipart/form-data body.
+    private func createMultipartFormData(boundary: String, data: Data, fileName: String) -> Data {
+        var body = Data()
+
+        // Add the image data to the raw http request data
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n")
+        body.append("Content-Type: image/jpeg\r\n\r\n")
+        body.append(data)
+        body.append("\r\n")
+
+        // Add the closing boundary
+        body.append("--\(boundary)--\r\n")
+        return body
+    }
+}
+
+// Helper function to append string data to Data object
+private extension Data {
+    mutating func append(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            append(data)
+        }
     }
 }
 
