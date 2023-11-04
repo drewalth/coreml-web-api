@@ -1,0 +1,556 @@
+{
+  "layer_shapes" : {
+    "activation_11_output" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "merge_15_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_29_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "merge_12_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_44_output" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_46_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_12_output" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "activation_47_output" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "bn2a_branch1_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "activation_3_output" : {
+      "k" : 64,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "activation_6_output" : {
+      "k" : 64,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "activation_13_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "activation_30_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "maxpooling2d_1_output" : {
+      "k" : 64,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "activation_48_output" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_14_output" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "activation_16_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "activation_31_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_49_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_15_output" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "activation_9_output" : {
+      "k" : 64,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "activation_17_output" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "activation_32_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "avg_pool_output" : {
+      "k" : 2048,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "bn4a_branch2c_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_18_output" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "merge_14_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_35_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_33_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "image__fix__underflow_____conv1" : {
+      "k" : 3,
+      "w" : 224,
+      "n" : 1,
+      "h" : 224
+    },
+    "bn3a_branch2c_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "merge_11_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_19_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "bn3b_branch2c_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "bn5a_branch2c_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "bn5a_branch1_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_36_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_34_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "merge_8_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "bn2a_branch2c_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "merge_9_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "bn5b_branch2c_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "bn2b_branch2c_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "merge_7_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "merge_6_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "merge_5_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "bn5c_branch2c_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "bn2c_branch2c_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "bn4b_branch2c_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_37_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_2_output" : {
+      "k" : 64,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "merge_3_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "activation_8_output" : {
+      "k" : 64,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "merge_4_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "merge_2_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "bn4c_branch2c_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_20_output" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "merge_1_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "activation_5_output" : {
+      "k" : 64,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "flatten_1_output" : {
+      "k" : 2048,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "activation_38_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "fc1000_output" : {
+      "k" : 1000,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "bn4d_branch2c_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "bn3c_branch2c_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "bn4e_branch2c_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_21_output" : {
+      "k" : 128,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "bn3d_branch2c_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "activation_39_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "bn4f_branch2c_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "bn4a_branch1_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "merge_16_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_22_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "merge_13_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "image" : {
+      "k" : 3,
+      "w" : 224,
+      "n" : 1,
+      "h" : 224
+    },
+    "merge_10_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_23_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_4_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "activation_25_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_1_output" : {
+      "k" : 64,
+      "w" : 112,
+      "n" : 1,
+      "h" : 112
+    },
+    "activation_40_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_24_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_26_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_41_output" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_27_output" : {
+      "k" : 256,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "bn3a_branch1_output" : {
+      "k" : 512,
+      "w" : 28,
+      "n" : 1,
+      "h" : 28
+    },
+    "activation_7_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "classLabelProbs" : {
+      "k" : 1000,
+      "w" : 1,
+      "n" : 1,
+      "h" : 1
+    },
+    "activation_42_output" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_10_output" : {
+      "k" : 256,
+      "w" : 55,
+      "n" : 1,
+      "h" : 55
+    },
+    "activation_28_output" : {
+      "k" : 1024,
+      "w" : 14,
+      "n" : 1,
+      "h" : 14
+    },
+    "activation_43_output" : {
+      "k" : 2048,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    },
+    "activation_45_output" : {
+      "k" : 512,
+      "w" : 7,
+      "n" : 1,
+      "h" : 7
+    }
+  }
+}
