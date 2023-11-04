@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A194A5122AF5FA6100489C82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A194A5112AF5FA6100489C82 /* ImagePicker.swift */; };
 		A1C53D5D2AF5BFFE008B9628 /* CoreMLWebClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C53D5C2AF5BFFE008B9628 /* CoreMLWebClientApp.swift */; };
 		A1C53D5F2AF5BFFE008B9628 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C53D5E2AF5BFFE008B9628 /* ContentView.swift */; };
 		A1C53D612AF5C000008B9628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1C53D602AF5C000008B9628 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A194A5112AF5FA6100489C82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A1C53D592AF5BFFE008B9628 /* CoreMLWebClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreMLWebClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1C53D5C2AF5BFFE008B9628 /* CoreMLWebClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLWebClientApp.swift; sourceTree = "<group>"; };
 		A1C53D5E2AF5BFFE008B9628 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 				A1C53D5E2AF5BFFE008B9628 /* ContentView.swift */,
 				A1C53D602AF5C000008B9628 /* Assets.xcassets */,
 				A1C53D622AF5C000008B9628 /* Preview Content */,
+				A194A5112AF5FA6100489C82 /* ImagePicker.swift */,
 			);
 			path = CoreMLWebClient;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A194A5122AF5FA6100489C82 /* ImagePicker.swift in Sources */,
 				A1C53D5F2AF5BFFE008B9628 /* ContentView.swift in Sources */,
 				A1C53D5D2AF5BFFE008B9628 /* CoreMLWebClientApp.swift in Sources */,
 			);
