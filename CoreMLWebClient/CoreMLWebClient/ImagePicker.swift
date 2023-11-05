@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+/// Select image from library
 struct ImagePicker: UIViewControllerRepresentable {
+    @Binding var sourceType: UIImagePickerController.SourceType
     @Environment(\.presentationMode) private var presentationMode
     var completion: (UIImage) -> Void
 
     func makeUIViewController(context: Context) -> some UIViewController {
         let picker = UIImagePickerController()
+        picker.sourceType = sourceType
         picker.delegate = context.coordinator
         return picker
     }

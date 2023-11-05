@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var image: UIImage?
     @State private var isImagePickerPresented = false
     @State private var viewModel = ViewModel()
+    @State private var sourceType: UIImagePickerController.SourceType = .camera
 
     @ViewBuilder
     func actionButton() -> some View {
@@ -24,9 +25,16 @@ struct ContentView: View {
                 viewModel.upload(image)
             }.buttonStyle(.borderedProminent)
         } else {
-            Button("Pick Image") {
-                isImagePickerPresented = true
-            }.buttonStyle(.bordered)
+            HStack(spacing: 20) {
+                Button("Camera") {
+                    sourceType = .camera
+                    isImagePickerPresented = true
+                }.buttonStyle(.bordered)
+                Button("Photo Library") {
+                    sourceType = .photoLibrary
+                    isImagePickerPresented = true
+                }.buttonStyle(.bordered)
+            }
         }
     }
 
@@ -61,7 +69,7 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $isImagePickerPresented) {
-            ImagePicker { image in
+            ImagePicker(sourceType: $sourceType) { image in
                 self.image = image
             }
         }
