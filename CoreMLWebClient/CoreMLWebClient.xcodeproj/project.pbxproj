@@ -12,6 +12,7 @@
 		A1C53D5F2AF5BFFE008B9628 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C53D5E2AF5BFFE008B9628 /* ContentView.swift */; };
 		A1C53D612AF5C000008B9628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1C53D602AF5C000008B9628 /* Assets.xcassets */; };
 		A1C53D642AF5C000008B9628 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1C53D632AF5C000008B9628 /* Preview Assets.xcassets */; };
+		A1E5D7D32AF720AD005BF146 /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5D7D22AF720AD005BF146 /* Classifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		A1C53D5E2AF5BFFE008B9628 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A1C53D602AF5C000008B9628 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1C53D632AF5C000008B9628 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A1E5D7D22AF720AD005BF146 /* Classifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				A1C53D602AF5C000008B9628 /* Assets.xcassets */,
 				A1C53D622AF5C000008B9628 /* Preview Content */,
 				A194A5112AF5FA6100489C82 /* ImagePicker.swift */,
+				A1E5D7D22AF720AD005BF146 /* Classifier.swift */,
 			);
 			path = CoreMLWebClient;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			files = (
 				A194A5122AF5FA6100489C82 /* ImagePicker.swift in Sources */,
 				A1C53D5F2AF5BFFE008B9628 /* ContentView.swift in Sources */,
+				A1E5D7D32AF720AD005BF146 /* Classifier.swift in Sources */,
 				A1C53D5D2AF5BFFE008B9628 /* CoreMLWebClientApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
