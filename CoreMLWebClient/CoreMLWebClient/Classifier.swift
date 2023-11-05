@@ -45,9 +45,7 @@ struct Classifier {
         }
 
         // Decode the data into an array of ClassifierResult
-        let decoder = JSONDecoder()
-        let results = try decoder.decode([ClassifierResult].self, from: data)
-        return results
+        return try JSONDecoder().decode([ClassifierResult].self, from: data)
     }
 
     /// Creates a multipart/form-data body with the image data.
