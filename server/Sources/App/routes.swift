@@ -4,8 +4,6 @@ import Vapor
 
 func routes(_ app: Application) throws {
     app.post("classify") { req -> [ClassifierResult] in
-
-        let logger = Logger(label: "routes.classify")
         let classificationRequest = try req.content.decode(ClassificationRequest.self)
         let imageBuffer = classificationRequest.file.data
         guard let fileData = imageBuffer.getData(at: imageBuffer.readerIndex, length: imageBuffer.readableBytes),
