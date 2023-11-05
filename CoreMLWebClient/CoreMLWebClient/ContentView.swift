@@ -68,12 +68,10 @@ struct ContentView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     ContentView()
-}
-
-enum Errors: Error {
-    case noSelectedImage
 }
 
 // MARK: - ViewModel
