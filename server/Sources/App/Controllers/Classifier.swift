@@ -19,9 +19,10 @@ struct Classifier {
         print("starting classify")
 
         var results = [VNClassificationObservation]()
+        let url = Bundle.module.url(forResource: "Resnet50", withExtension: "mlmodelc")!
 
         // Load the model.
-        guard let model = try? VNCoreMLModel(for: Resnet50(configuration: MLModelConfiguration()).model) else {
+        guard let model = try? VNCoreMLModel(for: Resnet50(contentsOf: url, configuration: MLModelConfiguration()).model) else {
             throw Errors.unableToLoadMLModel
         }
 

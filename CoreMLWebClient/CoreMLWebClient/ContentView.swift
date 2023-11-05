@@ -8,34 +8,67 @@
 import Foundation
 import SwiftUI
 
+enum RequestStatus {
+    case loading, success, idle, error
+}
+
 struct ContentView: View {
     @State private var image: UIImage?
     @State private var isImagePickerPresented = false
+    @State private var requestStatus: RequestStatus = .idle
+    @State private var classifierResults: [ClassifierResult] = []
 
-    var body: some View {
-        VStack(spacing: 20) {
-            if let image = image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-            }
+    @ViewBuilder
+    func actionButton() -> some View {
+        if let image = image {
+            Button("Upload Image") {
+                Task {
+                    do {
+                        requestStatus = .loading
+                        classifierResults = try await uploadPhoto(image: image, toURL: "http://10.11.211.192:8080/classify")
+                        requestStatus = .success
+                    } catch {
+                        print(error.localizedDescription)
+                        requestStatus = .error
+                    }
+                }
+            }.buttonStyle(.borderedProminent)
+        } else {
             Button("Pick Image") {
                 isImagePickerPresented = true
             }.buttonStyle(.bordered)
-            Button("Upload Image") {
+        }
+    }
+
+    var body: some View {
+        VStack(spacing: 20) {
+            HStack(spacing: 20) {
                 if let image = image {
-                    uploadPhoto(image: image, toURL: "http://10.11.211.192:8080/upload") { result in
-                        switch result {
-                        case let .success(success):
-                            print("Image was uploaded successfully: \(success)")
-                        case let .failure(error):
-                            print("Error uploading image: \(error)")
+                    VStack {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                    }.padding()
+                        .frame(maxHeight: 350)
+                }
+                List {
+                    ForEach(classifierResults, id: \.id) { result in
+                        VStack(alignment: .leading) {
+                            Text(result.label)
+                                .font(.callout)
+                            Text(result.confidence.formatted())
+                                .font(.caption2)
                         }
                     }
-                } else {
-                    print("nope")
                 }
-            }.buttonStyle(.borderedProminent)
+            }
+            Divider()
+            HStack(spacing: 20) {
+                actionButton()
+                if requestStatus == .loading {
+                    ProgressView()
+                }
+            }
         }
         .sheet(isPresented: $isImagePickerPresented) {
             ImagePicker { image in
@@ -49,49 +82,85 @@ struct ContentView: View {
     ///   - image: The image to be uploaded.
     ///   - url: The URL to which the image should be uploaded.
     ///   - completion: The completion handler to call when the upload is complete.
-    func uploadPhoto(image: UIImage, toURL url: String, completion: @escaping (Result<URLResponse, Error>) -> Void) {
+//    func uploadPhoto(image: UIImage, toURL url: String, completion: @escaping (Result<URLResponse, Error>) -> Void) {
+//        // Ensure the URL is valid
+//        guard let uploadURL = URL(string: url) else {
+//            completion(.failure(URLError(.badURL)))
+//            return
+//        }
+//
+//        // Convert the image to JPEG data
+//        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+//            completion(.failure(URLError(.unknown)))
+//            return
+//        }
+//
+//        // Create a URLRequest object
+//        var request = URLRequest(url: uploadURL)
+//        request.httpMethod = "POST"
+//
+//        // Generate boundary string using a unique per-app string
+//        let boundary = "Boundary-\(UUID().uuidString)"
+//
+//        // Set the Content-Type header
+//        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+//
+//        // TODO: get actual file name
+//        // file name
+//        let imageName = UUID().uuidString
+//
+//        // Create multipart form body
+//        let body = createMultipartFormData(boundary: boundary, data: imageData, fileName: imageName)
+//
+//        // Set the request body
+//        request.httpBody = body
+//
+//        // Perform the upload task
+//        let session = URLSession.shared
+//        let task = session.dataTask(with: request) { _, response, error in
+//            if let error = error {
+//                completion(.failure(error))
+//            } else if let response = response {
+//                completion(.success(response))
+//            }
+//        }
+//        task.resume()
+//    }
+    func uploadPhoto(image: UIImage, toURL url: String) async throws -> [ClassifierResult] {
         // Ensure the URL is valid
         guard let uploadURL = URL(string: url) else {
-            completion(.failure(URLError(.badURL)))
-            return
+            throw URLError(.badURL)
         }
 
         // Convert the image to JPEG data
         guard let imageData = image.jpegData(compressionQuality: 1.0) else {
-            completion(.failure(URLError(.unknown)))
-            return
+            throw URLError(.unknown)
         }
-
-        // Create a URLRequest object
-        var request = URLRequest(url: uploadURL)
-        request.httpMethod = "POST"
 
         // Generate boundary string using a unique per-app string
         let boundary = "Boundary-\(UUID().uuidString)"
 
-        // Set the Content-Type header
+        // Create a URLRequest object
+        var request = URLRequest(url: uploadURL)
+        request.httpMethod = "POST"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
-        // TODO: get actual file name
-        // file name
-        let imageName = UUID().uuidString
-
         // Create multipart form body
-        let body = createMultipartFormData(boundary: boundary, data: imageData, fileName: imageName)
-
-        // Set the request body
+        let body = createMultipartFormData(boundary: boundary, data: imageData, fileName: "photo.jpg")
         request.httpBody = body
 
         // Perform the upload task
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { _, response, error in
-            if let error = error {
-                completion(.failure(error))
-            } else if let response = response {
-                completion(.success(response))
-            }
+        let (data, response) = try await URLSession.shared.upload(for: request, from: body)
+
+        // Check the response and throw an error if it's not a HTTPURLResponse or the status code is not 200
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw URLError(.badServerResponse)
         }
-        task.resume()
+
+        // Decode the data into an array of ClassifierResult
+        let decoder = JSONDecoder()
+        let results = try decoder.decode([ClassifierResult].self, from: data)
+        return results
     }
 
     /// Creates a multipart/form-data body with the image data.
@@ -127,4 +196,14 @@ private extension Data {
 
 #Preview {
     ContentView()
+}
+
+struct ClassifierResult: Decodable, Identifiable {
+    let id = UUID()
+    var label: String
+    var confidence: Float
+}
+
+enum Errors: Error {
+    case noSelectedImage
 }

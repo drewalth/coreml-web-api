@@ -3,8 +3,20 @@ import NIO
 import Vapor
 
 func routes(_ app: Application) throws {
-    app.get { req in
-        req.view.render("index.leaf")
+    app.post("classify") { req -> [ClassifierResult] in
+
+        let logger = Logger(label: "routes.classify")
+        let classificationRequest = try req.content.decode(ClassificationRequest.self)
+        let imageBuffer = classificationRequest.file.data
+        guard let fileData = imageBuffer.getData(at: imageBuffer.readerIndex, length: imageBuffer.readableBytes),
+              let ciImage = CIImage(data: fileData)
+        else {
+            throw Errors.badImageData
+        }
+
+        let classifier = Classifier()
+
+        return try classifier.classify(image: ciImage)
     }
 
     app.post("upload") { req -> EventLoopFuture<HTTPStatus> in
