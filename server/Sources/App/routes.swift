@@ -25,11 +25,3 @@ enum Errors: Error {
 struct ClassificationRequest: Content {
     var file: File
 }
-
-extension ByteBufferAllocator {
-    func buffer(data: Data) -> ByteBuffer {
-        var buffer = self.buffer(capacity: data.count)
-        buffer.writeBytes(data)
-        return buffer
-    }
-}
