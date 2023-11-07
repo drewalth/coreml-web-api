@@ -76,8 +76,7 @@ struct ContentView: View {
     }
 
     private func formatAsPercentage(_ value: Float) -> String {
-        let percentageValue = value * 100
-        return String(format: "%.2f%%", percentageValue)
+         String(format: "%.2f%%", value * 100)
     }
 }
 

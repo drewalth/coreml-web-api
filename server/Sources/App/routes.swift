@@ -18,7 +18,7 @@ func routes(_ app: Application) throws {
 }
 
 enum Errors: Error {
-    case badImageData
+    case badImageData // or whatever
 }
 
 struct ClassificationRequest: Content {

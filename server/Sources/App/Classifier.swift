@@ -12,11 +12,6 @@ import Vision
 struct Classifier {
     private let logger = Logger(label: "Classifier")
 
-    private func convertCIImageToCGImage(image: CIImage) -> CGImage {
-        let context = CIContext(options: nil)
-        return context.createCGImage(image, from: image.extent)!
-    }
-
     func classify(image: CIImage) throws -> [ClassifierResult] {
         logger.info("Loading model")
         // load the model.
