@@ -54,7 +54,7 @@ struct ContentView: View {
                         VStack(alignment: .leading) {
                             Text(result.label)
                                 .font(.callout)
-                            Text(result.confidence.formatted())
+                            Text(formatAsPercentage(result.confidence))
                                 .font(.caption2)
                         }
                     }
@@ -73,6 +73,11 @@ struct ContentView: View {
                 self.image = image
             }
         }
+    }
+
+    private func formatAsPercentage(_ value: Float) -> String {
+        let percentageValue = value * 100
+        return String(format: "%.2f%%", percentageValue)
     }
 }
 
