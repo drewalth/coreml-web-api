@@ -34,7 +34,7 @@ struct ContentView: View {
                     sourceType = .photoLibrary
                     isImagePickerPresented = true
                 }.buttonStyle(.bordered)
-            }
+            }.padding(.bottom, 20)
         }
     }
 
