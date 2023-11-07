@@ -1,5 +1,4 @@
 import CoreImage
-import NIO
 import Vapor
 
 func routes(_ app: Application) throws {
