@@ -13,14 +13,14 @@ enum RequestStatus {
 }
 
 struct ContentView: View {
-    @State private var image: UIImage?
+    @State private var selectedImage: UIImage?
     @State private var isImagePickerPresented = false
     @State private var viewModel = ViewModel()
     @State private var sourceType: UIImagePickerController.SourceType = .camera
 
     @ViewBuilder
-    func actionButton() -> some View {
-        if let image = image {
+    private func actionButton() -> some View {
+        if let image = selectedImage {
             Button("Upload Image") {
                 viewModel.upload(image)
             }.buttonStyle(.borderedProminent)
@@ -41,7 +41,7 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 20) {
             HStack(spacing: 20) {
-                if let image = image {
+                if let image = selectedImage {
                     VStack {
                         Image(uiImage: image)
                             .resizable()
@@ -70,7 +70,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $isImagePickerPresented) {
             ImagePicker(sourceType: $sourceType) { image in
-                self.image = image
+                self.selectedImage = image
             }
         }
     }
