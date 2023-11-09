@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-/// Select image from library
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var sourceType: UIImagePickerController.SourceType
     @Environment(\.presentationMode) private var presentationMode
