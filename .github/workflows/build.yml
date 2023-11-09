@@ -1,0 +1,29 @@
+name: build
+on:
+  push:
+    branches:
+      - 'main'
+      - 'build-workflow' # for testing purposes
+jobs:
+  build-server:
+    name: Build Server
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: sersoft-gmbh/xcodebuild-action@v3
+        with:
+            workspace: coreml-web-api.xcworkspace
+            scheme: App
+            destination: platform=macOS
+            action: build
+  build-client:
+    name: Build Server
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: sersoft-gmbh/xcodebuild-action@v3
+        with:
+            workspace: coreml-web-api.xcworkspace
+            scheme: CoreMLWebClient
+            destination: platform=iOS Simulator,OS=16.2,name=iPhone 14
+            action: build
