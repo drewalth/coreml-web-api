@@ -4,6 +4,12 @@ on:
     branches:
       - 'main'
       - 'build-workflow' # for testing purposes
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   build-server:
     name: Build Server
