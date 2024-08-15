@@ -1,5 +1,5 @@
 //
-//  PhotoManager.swift
+//  Classifier.swift
 //  CoreMLWebClient
 //
 //  Created by Andrew Althage on 11/4/23.

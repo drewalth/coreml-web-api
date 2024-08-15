@@ -24,6 +24,7 @@ struct ContentView: View {
             Button("Upload Image") {
                 viewModel.upload(image)
             }.buttonStyle(.borderedProminent)
+                .disabled(viewModel.requestStatus == .loading)
         } else {
             HStack(spacing: 20) {
                 Button("Camera") {
@@ -39,44 +40,68 @@ struct ContentView: View {
     }
 
     var body: some View {
-        VStack(spacing: 20) {
-            HStack(spacing: 20) {
-                if let image = selectedImage {
-                    VStack {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                    }.padding()
-                        .frame(maxHeight: 350)
+        NavigationStack {
+            List {
+                Section {
+                    VStack(alignment: .center) {
+                        if let image = selectedImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                        } else {
+                            VStack(spacing: 16) {
+                                Image(systemName: "photo.badge.plus")
+                                Text("No image selected")
+                                    .foregroundColor(.secondary)
+                            }.onTapGesture {
+                                sourceType = .photoLibrary
+                                isImagePickerPresented = true
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(maxHeight: 350)
+                    .frame(height: 350)
                 }
-                List {
-                    ForEach(viewModel.results, id: \.id) { result in
-                        VStack(alignment: .leading) {
-                            Text(result.label)
-                                .font(.callout)
-                            Text(formatAsPercentage(result.confidence))
-                                .font(.caption2)
+
+                actionButton()
+                    .frame(maxWidth: .infinity)
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
+
+                Section("Results") {
+                    if viewModel.results.isEmpty {
+                        Text("Nothing yet...")
+                            .foregroundColor(.secondary)
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
+                    } else {
+                        ForEach(viewModel.results, id: \.id) { result in
+                            VStack(alignment: .leading, spacing: 1) {
+                                Text(result.label)
+                                    .font(.callout)
+                                Text(formatAsPercentage(result.confidence))
+                                    .font(.caption2)
+                            }
                         }
                     }
                 }
-            }
-            Divider()
-            HStack(spacing: 20) {
-                actionButton()
-                if viewModel.requestStatus == .loading {
-                    ProgressView()
+
+            }.navigationTitle("Classifier")
+                .sheet(isPresented: $isImagePickerPresented) {
+                    ImagePicker(sourceType: $sourceType) { image in
+                        self.selectedImage = image
+                    }
+                }.toolbar {
+                    if viewModel.requestStatus == .loading {
+                        ProgressView()
+                    }
                 }
-            }
-        }
-        .sheet(isPresented: $isImagePickerPresented) {
-            ImagePicker(sourceType: $sourceType) { image in
-                self.selectedImage = image
-            }
         }
     }
 
     private func formatAsPercentage(_ value: Float) -> String {
-         String(format: "%.2f%%", value * 100)
+        String(format: "%.2f%%", value * 100)
     }
 }
 
@@ -97,7 +122,7 @@ extension ContentView {
         private var classifier = Classifier()
 
         func upload(_ image: UIImage) {
-            Task { @MainActor in
+            Task {
                 do {
                     requestStatus = .loading
                     results.removeAll()
